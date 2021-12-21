@@ -67,10 +67,12 @@ function init(object, scene, objectList, animationList) {
       animationList.find((obj) => obj.item == "COFFEE").action.play();
       play("./Audios/addCoffee.mp3");
       setTimeout(() => {
-        // document.getElementById('overlay').style.display='block';
-        // var ele=document.getElementsByName('option');
-        // console.log(ele.value);
 
+        // -------------------------------
+        document.getElementById('overlay').style.display='block';
+        var ele=document.getElementsByName('option');
+        console.log(ele.value);
+        // --------------------------------
         objectList.find(
           (obj) => obj.name == "MILK"
         ).userData.isDraggable = true;
