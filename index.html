@@ -14,10 +14,10 @@
       padding: 0;
       overflow: hidden;
     }
-	.headingDiv{
-		display: flex;
-    	justify-content: center;
-	}
+    .headingDiv {
+      display: flex;
+      justify-content: center;
+    }
     #info {
       position: absolute;
       top: 10px;
@@ -31,76 +31,98 @@
       padding: 10px 20px;
       background-color: #0000005e;
       border-radius: 15px;
-      transition:3s;
+      transition: 3s;
       user-select: none;
       /* animation-duration: 3s;
     animation-name: slidein; */
-  }
-  #item-tobeplaced-area{
-    height:160px;
-    width:120px;
-    background-color: #0000005e;
-    /* z-index: 1; */
-    position: absolute;
-    display: flex; 
-    align-items: center;
-    justify-content: center;
-    color:rgba(255, 255, 255, 0.432);
-    top: 32vh;
-    left: 65vh;
-    border: 3px dashed #aba2a2;
-    border-radius: 20%;
-} 
-#overlay{
-	  width: 80vw;
-	  height: 80vh;
-	  background-color:blueviolet;
-	  color: white;
-	  margin: auto;
-    display: none;
-	  margin-top: 3%;
-	  position: absolute;
-	  left:10%;
-	  border :5px solid grey;
-	}
-	#step{
-	  display: flex;
-	  position: absolute;
-	  font-family: cursive;
-	  font-size: 300%;
-	  justify-content: center;
-	  align-items: center;
-	}
-	input[type=radio]{
-		border: 0px;
-		width: 10%;
-		height: 2em;
-	}
-	form{
-		margin-left: 2em;
-		height: 100%;
-	}
-	button{
-		font-size: 100%;
-		position: absolute;
-		top: 150%;
-		left: 100%;
-	}
-
+    }
+    #item-tobeplaced-area {
+      height: 160px;
+      width: 120px;
+      background-color: #0000005e;
+      /* z-index: 1; */
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255, 255, 255, 0.432);
+      top: 32vh;
+      left: 65vh;
+      border: 3px dashed #aba2a2;
+      border-radius: 20%;
+    }
+    #overlay {
+      width: 80vw;
+      height: 80vh;
+      background-color: blueviolet;
+      color: white;
+      margin: auto;
+      display: none;
+      margin-top: 3%;
+      position: absolute;
+      left: 10%;
+      border: 5px solid grey;
+    }
+    #step {
+      display: block;
+      position: absolute;
+      font-family: cursive;
+      font-size: 300%;
+      justify-content: center;
+      align-items: center;
+    }
+    input[type="radio"] {
+      border: 0px;
+      width: 10%;
+      height: 2em;
+    }
+    form {
+      margin-left: 2em;
+      height: 100%;
+    }
+    button {
+      font-size: 100%;
+      /* position: absolute; */
+      display: block;
+      top: 150%;
+      left: 100%;
+    }
+    #selectoption {
+      padding-left: 5%;
+    }
   </style>
   <body>
     <div id="overlay">
       <div id="step">
-        <form>
+        <!-- <form>
 	  	 <p>Please select what you prefer to add:</p>
-	  	 <input type="radio" id="MILK" name="option" value="MILK">
+	  	 <input type="radio" id="MILK" name="option" selected value="MILK">
 	  	 <label for="MILK">MILK</label><br>
 		 <input type="radio" id="WATER" name="option" value="WATER">
 		 <label for="WATER">WATER</label><br>
 		 <button id="sub" >Submit</button>
-		</form>  
-	  </div>
+		</form>   -->
+        <p>Please select what you prefer to add:</p>
+        <br />
+        <div id="selectoption">
+          <button onclick="option1()">MILK</button><br />
+          <button onclick="option2()">WATER</button>
+        </div>
+        <input type="hidden" id="modelSelectedItem" />
+        <div id="selectedItem" style="display: none">0</div>
+      </div>
     </div>
-    <div class="headingDiv"><span id="info">Step 1 - Put the kettle on stove</span></div>
+    <div class="headingDiv">
+      <span id="info">Step 1 - Switch on the stove by pressing red button</span>
+    </div>
+    <script>
+      function option1() {
+        document.querySelector("#selectedItem").innerHTML = 1;
+        
+      }
+      function option2() {
+        document.querySelector("#selectedItem").innerHTML = 2;
+      }
+    </script>
   </body>
 </html>

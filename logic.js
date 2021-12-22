@@ -1,17 +1,26 @@
+import globalvariable from "./GlobalVariable.js";
+
 let flag = 0;
+let ItemSelected;
+let kettleVar=0;
 function init(object, scene, objectList, animationList) {
   // console.log(flag);
   // console.log(objectList);
   console.log(animationList);
   if (object.name == "KETTLE") {
+    console.log(object.position);
     if (
       object.position.x > -20 &&
       object.position.x < -10 &&
-      object.position.y < -1
+      object.position.y < -1 &&
+      kettleVar==0
+
     ) {
+      kettleVar++;
+      globalvariable.flag=0;
       object.userData.isDraggable = false;
       if (flag == 0) {
-        let mytext = " Step 2 - add coffee to the kettle";
+        let mytext = " Step 3 - add coffee to the kettle";
         document.getElementById("info").style.transform = "translateY(-200px)";
         setTimeout(() => {
           document.getElementById("info").innerHTML = mytext;
@@ -67,18 +76,43 @@ function init(object, scene, objectList, animationList) {
       animationList.find((obj) => obj.item == "COFFEE").action.play();
       play("./Audios/addCoffee.mp3");
       setTimeout(() => {
+        // -----------------------------------
+        document.getElementById("overlay").style.display = "block";
+        var ele = document.getElementById("selectedItem").innerHTML;
+        console.log(ele);
+        setTimeout(() => {
+          ele = document.getElementById("selectedItem").innerHTML;
+          if (ele == "2") {
+            console.log("Water activated");
+            objectList.find(
+              (obj) => obj.name == "WATER"
+            ).userData.isDraggable = true;
+            document.getElementById("modelSelectedItem").value = "Water";
+            let mytext = `Step 4 - Add ${
+              document.getElementById("modelSelectedItem").value
+            } in the kettle`;
 
-        // -------------------------------
-        document.getElementById('overlay').style.display='block';
-        var ele=document.getElementsByName('option');
-        console.log(ele.value);
-        // --------------------------------
-        objectList.find(
-          (obj) => obj.name == "MILK"
-        ).userData.isDraggable = true;
+            document.getElementById("info").innerHTML = mytext;
+            document.getElementById("info").style.transform = "translateY(0px)";
+          } else {
+            objectList.find(
+              (obj) => obj.name == "MILK"
+            ).userData.isDraggable = true;
+            document.getElementById("modelSelectedItem").value = "Milk";
+            let mytext = `Step 4 - Add ${
+              document.getElementById("modelSelectedItem").value
+            } in the kettle`;
+
+            document.getElementById("info").innerHTML = mytext;
+            document.getElementById("info").style.transform = "translateY(0px)";
+          }
+          document.getElementById("overlay").style.display = "none";
+        }, 5000); //time for overlay
+
       }, 4000);
     }
   }
+
   if (object.name == "MILK") {
     // console.log(object.position);
     if (
@@ -100,21 +134,43 @@ function init(object, scene, objectList, animationList) {
       }, 4000);
     }
   }
+  if (object.name == "WATER") {
+    if (
+      object.position.x > -1 &&
+      object.position.x < 10 &&
+      object.position.y < 14
+    ) {
+      console.log(object.position);
+      console.log(
+        "playing water animations" +
+          animationList.find((obj) => obj.item == "WATER")
+      );
+      animationList.find((obj) => obj.item == "WATER").action.play();
+      play("./Audios/AddWater.mp3");
+      setTimeout(() => {
+        objectList.find(
+          (obj) => obj.name == "SUGAR"
+        ).userData.isDraggable = true;
+      }, 4000);
+    }
+  }
+
+  
+
   if (object.name == "SUGAR") {
     if (
       object.position.x > -1 &&
       object.position.x < 10 &&
       object.position.y < 14
     ) {
+
       animationList.find((obj) => obj.item == "SUGAR").action.play();
       // objectList.find((obj)=>obj.name == 'TEAPOT').userData.isDraggable=true;
       play("./Audios/addSugar.mp3");
       setTimeout(() => {
-        objectList.find(
-          (obj) => obj.name == "KETTLE"
-        ).userData.isDraggable = true;
+        globalvariable.flag=1;
         document.getElementById("info").style.transform = "translateY(-200px)";
-      }, 8000);
+      }, 15000);
       scene.remove(objectList.find((obj) => obj.name == "AREA"));
     }
   }
@@ -122,6 +178,7 @@ function init(object, scene, objectList, animationList) {
   //     actions[0].play()
   // }
 }
+
 function play(path) {
   var audio = new Audio(path);
   audio.play();
