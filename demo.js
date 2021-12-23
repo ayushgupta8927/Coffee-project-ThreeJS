@@ -215,15 +215,15 @@ function init() {
 
   //WATER
 
-  objLoader.loadAsync("./Models/jug_anim.fbx").then((group) => {
+  objLoader.loadAsync("./Models/waterAnim.fbx").then((group) => {
     const water = group;
     waterMixer = new THREE.AnimationMixer(group);
     mixers.push(waterMixer);
-    water.position.x = 87;
+    water.position.x = 90;
     water.position.y = -4.5;
-    water.position.z = 10;
-    water.scale.set(0.1, 0.2, 0.1);
-    water.rotateY(-2*Math.PI/4 );
+    water.position.z = 15;
+    water.scale.set(0.12, 0.12, 0.12);
+    water.rotateY(Math.PI/4 );
     water.castShadow = true;
     water.receiveShadow = true;
     water.name = "WATER";
@@ -236,8 +236,8 @@ function init() {
     waterMixer.addEventListener("finished", () => {
       water.position.x = -52;
       water.position.y = -4.0;
-      water.position.z = 5;
-      water.rotation.y=5;
+      water.position.z = 20;
+      water.rotation.y=15;
 
       let mytext = "step 5 -Add sugar as per your preference and stir well";
 

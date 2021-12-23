@@ -59,6 +59,20 @@ function init(object, scene, objectList, animationList) {
         objectList.find((obj) => obj.name == "KETTLE").position.x = 40;
         objectList.find((obj) => obj.name == "KETTLE").position.y = -4.5;
         objectList.find((obj) => obj.name == "KETTLE").position.z = 10;
+        // var img = document.createElement('img');
+        //     img.src = "./Images/confetti.gif" ;
+        //     img.width="700px";
+        //     img.height="700px";
+
+        //     document.getElementById('body').appendChild(img);
+        document.getElementById('congratulations').style.display='block';
+        play("./Audios/Congratulations.mp3");
+        setTimeout(()=>{
+          document.getElementById('congratulations').style.display='none';
+
+        },2000);
+
+
       }, 5000);
       document.getElementById("info").style.display = "none";
       console.log("playing kettle animation");
@@ -174,9 +188,8 @@ function init(object, scene, objectList, animationList) {
       scene.remove(objectList.find((obj) => obj.name == "AREA"));
     }
   }
-  // if(object.position.x<-25 && object.posiiton.y<20){
-  //     actions[0].play()
-  // }
+
+
 }
 
 function play(path) {
